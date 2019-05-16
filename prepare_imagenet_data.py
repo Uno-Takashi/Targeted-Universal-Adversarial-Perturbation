@@ -46,6 +46,14 @@ def undo_image_avg(img):
     img_copy[:, :, 2] = img_copy[:, :, 2] + 103.939
     return img_copy
 
+def do_image_avg(img):
+    img_copy = np.copy(img)
+    img_copy[:, :, 0] = img_copy[:, :, 0] - 123.68
+    img_copy[:, :, 1] = img_copy[:, :, 1] - 116.779
+    img_copy[:, :, 2] = img_copy[:, :, 2] - 103.939
+    img_copy.astype(np.uint8)
+    return img_copy
+
 def create_imagenet_npy(path_train_imagenet, len_batch=10000):
 
     # path_train_imagenet = '/datasets2/ILSVRC2012/train';

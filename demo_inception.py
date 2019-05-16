@@ -16,16 +16,15 @@ else:
 
 from universal_pert import targeted_perturbation
 device = '/gpu:0'
-num_classes = 10
+num_classes = 2
 
 def jacobian(y_flat, x, inds):
-    n = num_classes # Not really necessary, just a quick fix.
     loop_vars = [
          tf.constant(0, tf.int32),
-         tf.TensorArray(tf.float32, size=n),
+         tf.TensorArray(tf.float32, size=2),
     ]
     _, jacobian = tf.while_loop(
-        lambda j,_: j < n,
+        lambda j,_: j < 2,
         lambda j,result: (j+1, result.write(j, tf.gradients(y_flat[inds[j]], x))),
         loop_vars)
     return jacobian.stack()
@@ -87,7 +86,7 @@ if __name__ == '__main__':
             # TODO: Optimize this construction part!
             print('>> Compiling the gradient tensorflow functions. This might take some time...')
             y_flat = tf.reshape(persisted_output, (-1,))
-            inds = tf.placeholder(tf.int32, shape=(num_classes,))
+            inds = tf.placeholder(tf.int32, shape=(2,))
             dydx = jacobian(y_flat,persisted_input,inds)
 
             print('>> Computing gradient function...')
@@ -112,7 +111,7 @@ if __name__ == '__main__':
                 X = np.load(datafile)
 
             # Running universal perturbation
-            v = universal_perturbation(X, f, grad_fs, delta=0.2,num_classes=num_classes)
+            v = targeted_perturbation(X, f, grad_fs, delta=0.2,target=1)
 
             # Saving the universal perturbation
             np.save(os.path.join(file_perturbation), v)
