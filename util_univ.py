@@ -9,6 +9,9 @@ def visualization_pert(v):
     plt.imshow(v)
     plt.imshow()
 
+def img2str(f,img):
+    num_pert=np.argmax(f(img), axis=1).flatten()
+    return cat2label_str(num_pert)
 
 def cat2label_str(num_pert):
     labels = open(os.path.join('data', 'labels.txt'), 'r').read().split('\n')
