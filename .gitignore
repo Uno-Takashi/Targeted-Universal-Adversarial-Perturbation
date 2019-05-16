@@ -341,3 +341,10 @@ healthchecksdb
 
 # Tensorflow pb file
 *.pb
+
+# img data
+imaganet_data.npy
+imagenet_vals_data.npy
+/data/inception5h.zip
+/data/imagenet_data.npy
+

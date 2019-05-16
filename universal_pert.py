@@ -61,7 +61,7 @@ def targeted_perturbation(dataset, f, grads,target, delta=0.2, max_iter_uni = np
                 print('>> k = ', k, ', pass #', itr)
 
                 # Compute adversarial perturbation
-                dr,iter,_,_ = deeptarget(cur_img + v, f, grads, num_classes=num_classes, overshoot=overshoot, max_iter=max_iter_df)
+                dr,iter,_,_ = deeptarget(cur_img + v, f, grads, overshoot=overshoot, max_iter=max_iter_df)
 
                 # Make sure it converged...
                 if iter < max_iter_df-1:
