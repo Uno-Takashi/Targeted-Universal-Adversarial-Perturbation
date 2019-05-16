@@ -83,3 +83,5 @@ def create_imagenet_npy(path_train_imagenet, len_batch=10000):
             it = it + 1
 
     return im_array
+
+

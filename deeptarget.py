@@ -1,12 +1,11 @@
 import numpy as np
 
-def deeptarget(image, f, grads, num_classes=10, overshoot=0.02, max_iter=50,target=0):
+def deeptarget(image, f, grads, overshoot=0.02, max_iter=50,target=None):
 
     """
        :param image: Image of size HxWx3
        :param f: feedforward function (input: images, output: values of activation BEFORE softmax).
        :param grads: gradient functions with respect to input (as many gradients as classes).
-       :param num_classes: num_classes (limits the number of classes to test against, by default = 10)
        :param overshoot: used as a termination criterion to prevent vanishing updates (default = 0.02).
        :param max_iter: maximum number of iterations for deepfool (default = 10)
        :return: minimal perturbation that fools the classifier, number of iterations that it required, new estimated_label and perturbed image
@@ -15,7 +14,7 @@ def deeptarget(image, f, grads, num_classes=10, overshoot=0.02, max_iter=50,targ
     f_image = np.array(f(image)).flatten()
     I = (np.array(f_image)).flatten().argsort()[::-1]
 
-    I = I[0:num_classes]
+    I = I[0:2]
     label = I[0]
     I[1]=target
     print(I)
@@ -37,7 +36,7 @@ def deeptarget(image, f, grads, num_classes=10, overshoot=0.02, max_iter=50,targ
         pert = np.inf
         gradients = np.asarray(grads(pert_image,I))
 
-        for k in range(1, num_classes):
+        for k in range(1, 2):
 
             # set new w_k and new f_k
             w_k = gradients[k, :, :, :, :] - gradients[0, :, :, :, :]

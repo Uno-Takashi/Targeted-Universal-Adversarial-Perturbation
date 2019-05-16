@@ -14,7 +14,7 @@ else:
     from urllib import urlretrieve
 
 
-from universal_pert import universal_perturbation
+from universal_pert import targeted_perturbation
 device = '/gpu:0'
 num_classes = 10
 
