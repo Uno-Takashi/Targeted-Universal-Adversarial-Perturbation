@@ -111,7 +111,7 @@ if __name__ == '__main__':
                 X = np.load(datafile)
 
             # Running universal perturbation
-            v = targeted_perturbation(X, f, grad_fs, delta=0.2,target=1)
+            v = targeted_perturbation(X, f, grad_fs, delta=0.4,target=1)
 
             # Saving the universal perturbation
             np.save(os.path.join(file_perturbation), v)
