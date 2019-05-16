@@ -79,17 +79,18 @@ if __name__ == '__main__':
         def f(image_inp): return persisted_sess.run(persisted_output, feed_dict={persisted_input: np.reshape(image_inp, (-1, 224, 224, 3))})
 
         file_perturbation = os.path.join('data', 'universal.npy')
+            # TODO: Optimize this construction part!
+        print('>> Compiling the gradient tensorflow functions. This might take some time...')
+        y_flat = tf.reshape(persisted_output, (-1,))
+        inds = tf.placeholder(tf.int32, shape=(2,))
+        dydx = jacobian(y_flat,persisted_input,inds)
+
+        print('>> Computing gradient function...')
+        def grad_fs(image_inp, indices): return persisted_sess.run(dydx, feed_dict={persisted_input: image_inp, inds: indices}).squeeze(axis=1)
 
         if os.path.isfile(file_perturbation) == 0:
 
-            # TODO: Optimize this construction part!
-            print('>> Compiling the gradient tensorflow functions. This might take some time...')
-            y_flat = tf.reshape(persisted_output, (-1,))
-            inds = tf.placeholder(tf.int32, shape=(2,))
-            dydx = jacobian(y_flat,persisted_input,inds)
 
-            print('>> Computing gradient function...')
-            def grad_fs(image_inp, indices): return persisted_sess.run(dydx, feed_dict={persisted_input: image_inp, inds: indices}).squeeze(axis=1)
 
             # Load/Create data
             datafile = os.path.join('data', 'imagenet_data.npy')
