@@ -14,7 +14,7 @@ else:
     from urllib import urlretrieve
 
 
-from universal_pert import targeted_perturbation
+from targeted_universal_pert import targeted_perturbation
 from util_univ import *
 
 device = '/gpu:0'
@@ -110,7 +110,7 @@ if __name__ == '__main__':
                 print('>> Pre-processed imagenet data detected')
                 X = np.load(datafile)
             # Running universal perturbation
-            v = targeted_perturbation(X, f, grad_fs, delta=0.4,target=1)
+            v = targeted_perturbation(X, f, grad_fs, delta=0.3,max_iter_ui=10,target=1)
 
             # Saving the universal perturbation
             np.save(os.path.join(file_perturbation), v)
@@ -119,7 +119,7 @@ if __name__ == '__main__':
             print('>> Found a pre-computed universal perturbation! Retrieving it from ", file_perturbation')
             v = np.load(file_perturbation)
 
-        print('>> Testing the universal perturbation on an image')
+        print('>> Testing the targeted universal perturbation on an image')
 
         # Test the perturbation on the image
         labels = open(os.path.join('data', 'labels.txt'), 'r').read().split('\n')
