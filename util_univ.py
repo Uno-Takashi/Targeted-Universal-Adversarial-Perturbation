@@ -35,5 +35,6 @@ def target_fooling_rate_calc(v,dataset,f,target):
         est_labels_pert[m:M] = np.argmax(f(dataset_perturbed[m:M, :, :, :]), axis=1).flatten()
 
     # Compute the fooling rate
-    target_fooling_rate = float(np.sum(int(est_labels_pert) == target) / float(num_images))
+
+    target_fooling_rate = float(np.sum(est_labels_pert == target) / float(num_images))
     return target_fooling_rate

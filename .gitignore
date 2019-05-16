@@ -343,8 +343,8 @@ healthchecksdb
 *.pb
 
 # img data
-imaganet_data.npy
-imagenet_vals_data.npy
+
+/data/imagenet_vals_data.npy
 /data/inception5h.zip
 /data/imagenet_data.npy
 

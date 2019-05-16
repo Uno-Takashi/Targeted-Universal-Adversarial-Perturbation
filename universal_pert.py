@@ -1,5 +1,4 @@
 import numpy as np
-from deepfool import deepfool
 from deeptarget import deeptarget
 from util_univ import *
 
@@ -18,22 +17,23 @@ def proj_lp(v, xi, p):
 
     return v
 
-def targeted_perturbation(dataset, f, grads,target, delta=0.2, max_iter_uni = np.inf, xi=10, p=np.inf, overshoot=0.02, max_iter_df=10):
+def targeted_perturbation(dataset, f, grads,target, delta=0.2, max_iter_uni = np.inf, xi=10, p=np.inf, overshoot=0.02, max_iter_df=20):
     """
-    :param dataset: Images of size MxHxWxC (M: number of images)
+    :param dataset: Images of size MxHxWxC (M: number of images). I Recommend M > 5000
 
     :param f: feedforward function (input: images, output: values of activation BEFORE softmax).
 
     :param grads: gradient functions with respect to input (as many gradients as classes).
 
-    :param delta: controls the desired fooling rate (default = 80% fooling rate)
+    :param delta: controls the desired target fooling rate (default = 80% fooling rate)
+
+    :target : target classes namber. 
 
     :param max_iter_uni: optional other termination criterion (maximum number of iteration, default = np.inf)
 
     :param xi: controls the l_p magnitude of the perturbation (default = 10)
 
     :param p: norm to be used (FOR NOW, ONLY p = 2, and p = np.inf ARE ACCEPTED!) (default = np.inf)
-
 
     :param overshoot: used as a termination criterion to prevent vanishing updates (default = 0.02).
 
@@ -57,11 +57,11 @@ def targeted_perturbation(dataset, f, grads,target, delta=0.2, max_iter_uni = np
         for k in range(0, num_images):
             cur_img = dataset[k:(k+1), :, :, :]
 
-            if int(np.argmax(np.array(f(cur_img)).flatten())) == int(np.argmax(np.array(f(cur_img+v)).flatten())):
+            if int(np.argmax(np.array(f(cur_img+v)).flatten())) != int(target):
                 print('>> k = ', k, ', pass #', itr)
 
                 # Compute adversarial perturbation
-                dr,iter,_,_ = deeptarget(cur_img + v, f, grads, overshoot=overshoot, max_iter=max_iter_df)
+                dr,iter,_,_ = deeptarget(cur_img + v, f, grads, overshoot=overshoot, max_iter=max_iter_df,target=target)
 
                 # Make sure it converged...
                 if iter < max_iter_df-1:
@@ -73,25 +73,10 @@ def targeted_perturbation(dataset, f, grads,target, delta=0.2, max_iter_uni = np
         itr = itr + 1
 
         # Perturb the dataset with computed perturbation
-        dataset_perturbed = dataset + v
 
-        est_labels_orig = np.zeros((num_images))
-        est_labels_pert = np.zeros((num_images))
 
-        batch_size = 100
-        num_batches = np.int(np.ceil(np.float(num_images) / np.float(batch_size)))
-
-        # Compute the estimated labels in batches
-        for ii in range(0, num_batches):
-            m = (ii * batch_size)
-            M = min((ii+1)*batch_size, num_images)
-            est_labels_orig[m:M] = np.argmax(f(dataset[m:M, :, :, :]), axis=1).flatten()
-            est_labels_pert[m:M] = np.argmax(f(dataset_perturbed[m:M, :, :, :]), axis=1).flatten()
-
-        # Compute the fooling rate
-        fooling_rate = float(np.sum(est_labels_pert != est_labels_orig) / float(num_images))
-        print('FOOLING RATE = ', fooling_rate)
+        # Compute the target fooling rate
+        target_fooling_rate = target_fooling_rate_calc(v=v,dataset=dataset,f=f,target=target)
+        print('TARGET FOOLING RATE = ', target_fooling_rate)
 
     return v
-
-

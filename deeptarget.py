@@ -10,6 +10,8 @@ def deeptarget(image, f, grads, overshoot=0.02, max_iter=50,target=None):
        :param max_iter: maximum number of iterations for deepfool (default = 10)
        :return: minimal perturbation that fools the classifier, number of iterations that it required, new estimated_label and perturbed image
     """
+    if target==None:
+        raise ValueError("Target is not enough")
 
     f_image = np.array(f(image)).flatten()
     I = (np.array(f_image)).flatten().argsort()[::-1]
@@ -17,7 +19,6 @@ def deeptarget(image, f, grads, overshoot=0.02, max_iter=50,target=None):
     I = I[0:2]
     label = I[0]
     I[1]=target
-    print(I)
 
     input_shape = image.shape
     pert_image = image

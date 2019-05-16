@@ -16,7 +16,6 @@ else:
 
 from universal_pert import targeted_perturbation
 device = '/gpu:0'
-num_classes = 2
 
 def jacobian(y_flat, x, inds):
     loop_vars = [
@@ -109,7 +108,6 @@ if __name__ == '__main__':
             else:
                 print('>> Pre-processed imagenet data detected')
                 X = np.load(datafile)
-
             # Running universal perturbation
             v = targeted_perturbation(X, f, grad_fs, delta=0.4,target=1)
 
