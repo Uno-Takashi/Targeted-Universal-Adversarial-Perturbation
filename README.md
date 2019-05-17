@@ -50,9 +50,13 @@ python demo_inception.py -i data/test_img.png
 
 これを行うと自動的に事前学習されたInceptionモデルをダウンロードし、test_img.pngにTargeted Universal Adversarial Perturbationを添加し、識別した結果の文字列とともにを出力します。
 
+
+
 ###  自分のモデルでTargeted Universal Adversarial Perturbationを計算する
 
 ## 参考文献
 
 [1] S. Moosavi-Dezfooli\*, A. Fawzi\*, O. Fawzi, P. Frossard:
 [*Universal adversarial perturbations*](http://arxiv.org/pdf/1610.08401), CVPR 2017.
+
+*Targeted verの論文は卒業論文として執筆したため、非公開となります。
