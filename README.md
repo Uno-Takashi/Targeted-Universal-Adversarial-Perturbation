@@ -20,7 +20,7 @@ To get started, you can run the demo code to apply a pre-computed universal pert
 python demo_inception.py -i data/test_img.png	
 ```
 This will download the pre-trained model, and show the image without and with universal perturbation with the estimated labels.
-In this example, the pre-computed universal perturbation in `data/universal.npy` is used.
+In this example, the pre-computed targeted universal perturbation in `data/universal.npy` is used. This Perturbation tageted kit fox class.
 
 ### Computing a universal perturbation for your model
 
@@ -41,8 +41,14 @@ python3.x:[TensorFlow](https://github.com/tensorflow/tensorflow)を使い実装してい
 
 ## 使い方
 
+### はじめに
+
 まず最初に、あなたの指定した任意の画像について、Inceptionモデルを使い、事前学習によって作られたTargeted Universal Adversarial Perturbationを重ね、識別結果を視覚化します。
 
 ```
 python demo_inception.py -i data/test_img.png	
 ```
+
+これを行うと自動的に事前学習されたInceptionモデルをダウンロードし、test_img.pngにTargeted Universal Adversarial Perturbationを添加し、識別した結果の文字列とともにを出力します。
+
+###  自分のモデルでTargeted Universal Adversarial Perturbationを計算する
