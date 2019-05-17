@@ -110,7 +110,7 @@ if __name__ == '__main__':
                 print('>> Pre-processed imagenet data detected')
                 X = np.load(datafile)
             # Running universal perturbation
-            v = targeted_perturbation(X, f, grad_fs, delta=0.2,max_iter_uni=10,target=2)
+            v = targeted_perturbation(X, f, grad_fs, delta=0.3,max_iter_uni=10,target=3)
 
             # Saving the universal perturbation
             np.save(os.path.join(file_perturbation), v)
