@@ -6,11 +6,6 @@ Only Python3.x ver included.
 
 *python*: Python3.x code to generate universal perturbations using [TensorFlow](https://github.com/tensorflow/tensorflow).
 
-
-## Python
-
-Python code to find a universal perturbation [[1]](http://arxiv.org/pdf/1610.08401), using the [TensorFlow](https://www.tensorflow.org/) library.
-
 ## Usage
 
 ### Get started
@@ -30,7 +25,7 @@ used to compute the perturbation, as well as the feedforward and gradient functi
 
 ## Targeted Perturbations
 
-precom
+precomputing_perturbations directory include some precomputing targeted universal adversarial perturbations.
 
 ## Reference
 [1] S. Moosavi-Dezfooli\*, A. Fawzi\*, O. Fawzi, P. Frossard:
@@ -56,3 +51,8 @@ python demo_inception.py -i data/test_img.png
 これを行うと自動的に事前学習されたInceptionモデルをダウンロードし、test_img.pngにTargeted Universal Adversarial Perturbationを添加し、識別した結果の文字列とともにを出力します。
 
 ###  自分のモデルでTargeted Universal Adversarial Perturbationを計算する
+
+## 参考文献
+
+[1] S. Moosavi-Dezfooli\*, A. Fawzi\*, O. Fawzi, P. Frossard:
+[*Universal adversarial perturbations*](http://arxiv.org/pdf/1610.08401), CVPR 2017.
