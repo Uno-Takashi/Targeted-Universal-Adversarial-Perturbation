@@ -43,11 +43,11 @@ def targeted_perturbation(dataset, f, grads,target, delta=0.2, max_iter_uni = np
     """
 
     v = 0
-    fooling_rate = 0.0
+    target_fooling_rate = 0.0
     num_images =  np.shape(dataset)[0] # The images should be stacked ALONG FIRST DIMENSION
 
     itr = 0
-    while fooling_rate < 1-delta and itr < max_iter_uni:
+    while target_fooling_rate < 1-delta and itr < max_iter_uni:
         # Shuffle the dataset
         np.random.shuffle(dataset)
 
