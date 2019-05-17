@@ -57,6 +57,6 @@ def deeptarget(image, f, grads, overshoot=0.02, max_iter=50,target=None):
         k_i = int(np.argmax(f_i))
 
     r_tot = (1+overshoot)*r_tot
-    print(o_i," --> ",k_i)
+    #print(o_i," --> ",k_i)
 
     return r_tot, loop_i, k_i, pert_image
