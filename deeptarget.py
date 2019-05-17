@@ -32,6 +32,7 @@ def deeptarget(image, f, grads, overshoot=0.02, max_iter=50,target=None):
 
     loop_i = 0
 
+	# we can't use k_i!=target. DeepTarget is limited L2 norm .therefore generate huge perturbation.
     while k_i == label and loop_i < max_iter:
 
         pert = np.inf
