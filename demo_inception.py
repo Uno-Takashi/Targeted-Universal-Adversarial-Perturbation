@@ -17,6 +17,7 @@ else:
 from targeted_universal_pert import targeted_perturbation
 from util_univ import *
 
+# if you want using cpu. change for device='/cpu:0'
 device = '/gpu:0'
 
 def jacobian(y_flat, x, inds):
