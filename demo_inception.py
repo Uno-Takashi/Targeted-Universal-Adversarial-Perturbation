@@ -20,6 +20,9 @@ from util_univ import *
 # if you want using cpu. change for device='/cpu:0'
 device = '/gpu:0'
 
+# choose your target
+target=4
+
 def jacobian(y_flat, x, inds):
     loop_vars = [
          tf.constant(0, tf.int32),
@@ -111,7 +114,7 @@ if __name__ == '__main__':
                 print('>> Pre-processed imagenet data detected')
                 X = np.load(datafile)
             # Running universal perturbation
-            v = targeted_perturbation(X, f, grad_fs, delta=0.3,max_iter_uni=10,target=3)
+            v = targeted_perturbation(X, f, grad_fs, delta=0.3,max_iter_uni=10,target=target)
 
             # Saving the universal perturbation
             np.save(os.path.join(file_perturbation), v)
