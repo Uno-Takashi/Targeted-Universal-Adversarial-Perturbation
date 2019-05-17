@@ -1,13 +1,10 @@
 # Targeted Universal adversarial perturbations
 
-Only Python ver included.
+This repos extended [Universal Adversarial Perturbation](https://github.com/LTS4/universal) to target attack.
 
-*python*: Python code to generate universal perturbations using [TensorFlow](https://github.com/tensorflow/tensorflow).
+Only Python3.x ver included.
 
-
-## Reference
-[1] S. Moosavi-Dezfooli\*, A. Fawzi\*, O. Fawzi, P. Frossard:
-[*Universal adversarial perturbations*](http://arxiv.org/pdf/1610.08401), CVPR 2017
+*python*: Python3.x code to generate universal perturbations using [TensorFlow](https://github.com/tensorflow/tensorflow).
 
 
 # Python
@@ -34,3 +31,18 @@ used to compute the perturbation, as well as the feedforward and gradient functi
 ## Reference
 [1] S. Moosavi-Dezfooli\*, A. Fawzi\*, O. Fawzi, P. Frossard:
 [*Universal adversarial perturbations*](http://arxiv.org/pdf/1610.08401), CVPR 2017.
+
+
+# ターゲット型汎用的摂動(Japanese Docmentation)
+
+このリポジトリは[Universal Adversarial Perturbation](https://github.com/LTS4/universal)をターゲット型攻撃に拡張したものです。Python3.xのコードのみ含みます。
+
+python3.x:[TensorFlow](https://github.com/tensorflow/tensorflow)を使い実装しています。
+
+## 使い方
+
+まず最初に、あなたの指定した任意の画像について、Inceptionモデルを使い、事前学習によって作られたTargeted Universal Adversarial Perturbationを重ね、識別結果を視覚化します。
+
+```
+python demo_inception.py -i data/test_img.png	
+```
