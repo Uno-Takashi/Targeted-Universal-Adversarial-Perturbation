@@ -58,12 +58,12 @@ def targeted_perturbation(dataset, f, grads,target, delta=0.2, max_iter_uni = np
 
             if int(np.argmax(np.array(f(cur_img+v)).flatten())) != int(target):
                 
-                print("\rProgress : ["+"#"*int(k/int(num_images/20))+"*"*(20-int(k/int(num_images/20)))+"] ", str(k).zfill(len(str(num_images))), ' / ',num_images,"," ,end="")
+                print("\rProgress : ["+"#"*int(k/int(num_images/20))+"-"*(20-int(k/int(num_images/20)))+"] ", str(k).zfill(len(str(num_images))), ' / ',num_images,"," ,end="")
                 # Compute adversarial perturbation
                 dr,iter,pert_label,_ = deeptarget(cur_img + v, f, grads, overshoot=overshoot, max_iter=max_iter_df,target=target)
 
                 
-                print(" Tracking labels :",int(np.argmax(np.array(f(cur_img+v)).flatten())),"->",pert_label,end="")
+                print(" Tracking labels :",int(np.argmax(np.array(f(cur_img+v)).flatten())),"->",pert_label," "*6,end="")
 
                 # Make sure it converged...
                 if iter < max_iter_df-1:
