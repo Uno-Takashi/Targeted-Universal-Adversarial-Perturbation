@@ -54,6 +54,19 @@ def do_image_avg(img):
     img_copy.astype(np.uint8)
     return img_copy
 
+def undo_image_list(img_list):
+    undo_list=np.zeros(img_list.shape,dtype=np.uint8)
+    for x in range(undo_list.shape[0]):
+        undo_list[x]=undo_image_avg(img_list[x]).astype(np.uint8)
+    return undo_list
+
+def do_image_list(img_list):
+    do_list=np.zeros(img_list.shape,dtype=np.float32)
+
+    for x in range(do_list.shape[0]):
+        do_list[x]=do_image_avg(img_list[x]).astype(np.float32)
+    return do_list
+
 def create_imagenet_npy(path_train_imagenet, len_batch=10000):
 
     # path_train_imagenet = '/datasets2/ILSVRC2012/train';
@@ -93,3 +106,19 @@ def create_imagenet_npy(path_train_imagenet, len_batch=10000):
     return im_array
 
 
+def path2list(vals_path):
+
+    return glob.glob(vals_path)
+import glob
+
+def vals_imagenet_data_create(length):
+    # plz update path
+    files_list=glob.glob("/datasets2/ILSVRC2012/*.JPEG")
+
+    import random
+
+    print(len(files_list))
+    #random.shuffle(files_list)
+
+    vals_data=files_list[0:5000]
+    np.save("imaenet_vals_data.npy",preprocess_image_batch(vals_data,img_size=(256, 256), crop_size=(224, 224), color_mode="rgb"))
