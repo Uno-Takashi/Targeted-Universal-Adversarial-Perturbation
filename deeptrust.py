@@ -1,5 +1,8 @@
 import numpy as np
 
+# We do not use this time!!!!!
+# Calc maximum confidence image.
+
 def deeptrust(image, f, grads,f_end,   max_iter=10,trust_target_rate=0.7 ,num_classes=2):
 
     """
