@@ -38,17 +38,11 @@ def deeptarget(image, f, grads, overshoot=0.02, max_iter=50,target=None):
         pert = np.inf
         gradients = np.asarray(grads(pert_image,I))
 
-        for k in range(1, 2):
 
             # set new w_k and new f_k
-            w_k = gradients[k, :, :, :, :] - gradients[0, :, :, :, :]
-            f_k = f_i[I[k]] - f_i[I[0]]
-            pert_k = abs(f_k)/np.linalg.norm(w_k.flatten())
-
-            # determine which w_k to use
-            if pert_k < pert:
-                pert = pert_k
-                w = w_k
+        w = gradients[1, :, :, :, :] - gradients[0, :, :, :, :]
+        f_t = f_i[I[1]] - f_i[I[0]]
+        pert = abs(f_t)/np.linalg.norm(w.flatten())
 
         # compute r_i and r_tot
         r_i =  pert * w / np.linalg.norm(w)
