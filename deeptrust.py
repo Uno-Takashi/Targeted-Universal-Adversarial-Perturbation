@@ -41,14 +41,9 @@ def deeptrust(image, f, grads,f_end,   max_iter=10,trust_target_rate=0.7 ,num_cl
 
 
             # set new w_k and new f_k
-        w_k = gradients[0, :, :, :, :]
-        f_k =  f_i[I[0]]
-        pert_k = abs(f_k)/np.linalg.norm(w_k.flatten())
-
-        # determine which w_k to use
-        if pert_k < pert:
-            pert = pert_k
-            w = w_k
+        w = gradients[0, :, :, :, :]
+        f_t =  f_i[I[0]]
+        pert = abs(f_t)/np.linalg.norm(w.flatten())
 
         # compute r_i and r_tot
         r_i =  pert * w / np.linalg.norm(w)
