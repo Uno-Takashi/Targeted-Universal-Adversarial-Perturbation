@@ -21,7 +21,7 @@ from util_univ import *
 device = '/gpu:0'
 
 # choose your target
-target=4
+target = 1
 
 def jacobian(y_flat, x, inds):
     loop_vars = [
