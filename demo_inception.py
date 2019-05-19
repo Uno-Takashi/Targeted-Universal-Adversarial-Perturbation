@@ -21,7 +21,7 @@ from util_univ import *
 device = '/gpu:0'
 
 # choose your target
-target = 1
+target = 6
 
 def jacobian(y_flat, x, inds):
     loop_vars = [
@@ -83,9 +83,12 @@ if __name__ == '__main__':
 
         print('>> Computing feedforward function...')
         def f(image_inp): return persisted_sess.run(persisted_output, feed_dict={persisted_input: np.reshape(image_inp, (-1, 224, 224, 3))})
-
-        file_perturbation = os.path.join('data', 'universal-target-'+str(target).zfill(5)+'.npy')
-            # TODO: Optimize this construction part!
+        if target==None:
+            file_perturbation = os.path.join('data','precomputing_perturbations', 'universal-nontarget.npy')
+        else:
+            file_perturbation = os.path.join('data','precomputing_perturbations', 'universal-target-'+str(target).zfill(5)+'.npy')
+            
+        # TODO: Optimize this construction part!
         print('>> Compiling the gradient tensorflow functions. This might take some time...')
         y_flat = tf.reshape(persisted_output, (-1,))
         inds = tf.placeholder(tf.int32, shape=(2,))
@@ -114,10 +117,13 @@ if __name__ == '__main__':
                 print('>> Pre-processed imagenet data detected')
                 X = np.load(datafile)
             # Running universal perturbation
-            v = targeted_perturbation(X, f, grad_fs, delta=0.3,max_iter_uni=10,target=target)
+            for x in range(995):
+                v = targeted_perturbation(X, f, grad_fs, delta=0.25,max_iter_uni=10,target=target)
 
-            # Saving the universal perturbation
-            np.save(os.path.join(file_perturbation), v)
+                # Saving the universal perturbation
+                file_perturbation = os.path.join('data','precomputing_perturbations', 'universal-target-'+str(target).zfill(5)+'.npy')
+                np.save(os.path.join(file_perturbation), v)
+                target+=1
 
         else:
             print('>> Found a pre-computed universal perturbation! Retrieving it from ", file_perturbation')
