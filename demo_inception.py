@@ -84,7 +84,7 @@ if __name__ == '__main__':
         print('>> Computing feedforward function...')
         def f(image_inp): return persisted_sess.run(persisted_output, feed_dict={persisted_input: np.reshape(image_inp, (-1, 224, 224, 3))})
 
-        file_perturbation = os.path.join('data', 'universal.npy')
+        file_perturbation = os.path.join('data', 'universal-target-'+str(target).zfill(5)+'.npy')
             # TODO: Optimize this construction part!
         print('>> Compiling the gradient tensorflow functions. This might take some time...')
         y_flat = tf.reshape(persisted_output, (-1,))
