@@ -51,7 +51,7 @@ def targeted_perturbation(dataset, f, grads,target, delta=0.2, max_iter_uni = np
         # Shuffle the dataset
         np.random.shuffle(dataset)
 
-        print ('Starting pass number ', itr)
+        print ('Starting pass number ', itr,'Target is ' , target)
         # Go through the data set and compute the perturbation increments sequentially
         for k in range(0, num_images):
             cur_img = dataset[k:(k+1), :, :, :]
