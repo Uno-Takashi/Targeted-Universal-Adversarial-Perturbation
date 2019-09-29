@@ -15,12 +15,12 @@ To get started, you can run the demo code to apply a pre-computed universal pert
 python demo_inception.py -i data/test_img.png	
 ```
 This will download the pre-trained model, and show the image without and with universal perturbation with the estimated labels.
-In this example, the pre-computed targeted universal perturbation in `data/universal.npy` is used. This Perturbation targeted kit fox class.
+In this example, the pre-computed targeted universal perturbation in `data/precomputing_perturbations/universal-target-00001.npy` is used. This Perturbation targeted kit fox class.And `data/precomputing_perturbations/` folder include all target perturbation.
 
-### Computing a universal perturbation for your model
+### Computing a targeted universal perturbation for your model
 
-To compute a universal perturbation for your model, please follow the same struture as in `demo_inception.py`.
-In particular, you should use the `universal_perturbation` function (see `universal_pert.py` for details), with the set of training images 
+To compute a targeted universal perturbation for your model, please follow the same struture as in `demo_inception.py`.
+In particular, you should use the `targeted-universal_perturbation` function (see `targeted-universal_pert.py` for details), with the set of training images 
 used to compute the perturbation, as well as the feedforward and gradient functions.
 
 ## Targeted Perturbations
