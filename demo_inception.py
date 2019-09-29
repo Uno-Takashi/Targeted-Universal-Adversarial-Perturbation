@@ -20,9 +20,9 @@ from util_univ import *
 # if you want using cpu. change for device='/cpu:0'
 device = '/gpu:0'
 
-# choose your target class number based on imagenets.
+# choose your target class number based on imagenets or None(Non-target).
 # 
-target = 1000
+target = 1
 
 def jacobian(y_flat, x, inds):
     loop_vars = [
