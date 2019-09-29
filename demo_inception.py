@@ -22,7 +22,7 @@ device = '/gpu:0'
 
 # choose your target class number based on imagenets.
 # 
-target = 1
+target = 1000
 
 def jacobian(y_flat, x, inds):
     loop_vars = [

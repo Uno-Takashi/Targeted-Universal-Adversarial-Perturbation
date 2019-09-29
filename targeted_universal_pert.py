@@ -74,8 +74,6 @@ def targeted_perturbation(dataset, f, grads,target, delta=0.2, max_iter_uni = np
 
         itr = itr + 1
 
-        # Perturb the dataset with computed perturbation
-
 
         # Compute the target fooling rate
         target_fooling_rate = target_fooling_rate_calc(v=v,dataset=dataset,f=f,target=target)
