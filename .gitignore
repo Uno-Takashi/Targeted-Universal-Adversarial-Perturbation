@@ -347,5 +347,7 @@ healthchecksdb
 /data/imagenet_vals_data.npy
 /data/inception5h.zip
 /data/imagenet_data.npy
+/venv
+/venv/*
 
 *.sqlite
